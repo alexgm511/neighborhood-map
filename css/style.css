@@ -1,0 +1,43 @@
+body {
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ }
+html, body, #map, #map-canvas { 
+	height: 100%; 
+	margin: 0; 
+	padding: 0;
+}
+
+.addressBar { 
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	width: 50%;
+	margin-left: -25%;
+	background-color: #fff; 
+	list-style-type: none; 
+	padding: 7px; 
+	border: 2px solid #999;
+	/*border-radius: 7px; 
+	font-size: 1em;*/
+	z-index: 5;
+}
+
+.addressBar li:first-child { 
+	font-size: 1.2em;
+}
+
+.addressBar li { 
+	font-size: 0.8em; 
+	font-weight: bold; 
+	display: inline-block; 
+	padding: 0.5em 1.5em; 
+	color: #444; 
+	left: 20%; 
+}
+
+
+/*.addressBar li:hover { background-color: #ddd; }    
+.addressBar li:first-child { border-left: none; border-radius: 7px 0 0 7px; }
+.addressBar li { font-size: 16px; font-weight: bold; display: inline-block; padding: 0.5em 1.5em; cursor: pointer; color: #444; text-shadow: #f7f7f7 0 1px 1px; border-left: 1px solid #ddd; border-right: 1px solid #888; left: 20%; }
+.addressBar li { *display: inline !important; } /* IE7 only */
+/*.addressBar .selected { background-color: #444 !important; color: white; text-shadow:none; border-right-color: #aaa; border-left: none; box-shadow:inset 1px 2px 6px #070707; }   */
