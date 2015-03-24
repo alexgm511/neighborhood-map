@@ -22,10 +22,6 @@ html, body, #map, #map-canvas {
 	z-index: 5;
 }
 
-.addressBar li:first-child { 
-	font-size: 1.2em;
-}
-
 .addressBar li { 
 	font-size: 0.8em; 
 	font-weight: bold; 
@@ -33,6 +29,11 @@ html, body, #map, #map-canvas {
 	padding: 0.5em 1.5em; 
 	color: #444; 
 	left: 20%; 
+}
+
+.addressBar li:first-child { 
+	font-size: 1.2em;
+	color: #7c606b;
 }
 
 

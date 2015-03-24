@@ -5,14 +5,14 @@
 	<title>Neighborhood Map</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKffQ59SdaJYYrDkdp995ubP6S8HbXy2o">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKffQ59SdaJYYrDkdp995ubP6S8HbXy2o&libraries=places">
     </script>
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<ul class="addressBar">
 		<li>Neighborhood Happenings</li>
-		<li>Choose a neighborhood: <input data-bind="value: neigborhood" /></li>
+		<li>City and neighborhood: <input data-bind="value: neigborhood" /></li>
 		<li><button data-bind="click: loadMap">Go</button></li>
 	</ul>
 	<div id="map" data-bind="value: map">
