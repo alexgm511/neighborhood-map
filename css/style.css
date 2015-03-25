@@ -7,38 +7,69 @@ html, body, #map, #map-canvas {
 	padding: 0;
 }
 
-.addressBar { 
+.overlayInfo {
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	left: 50%;
-	width: 50%;
-	margin-left: -25%;
+	width: 70%;
+	margin-left: -35%;
+	z-index: 5;
+	pointer-events: none;
+}
+
+.addressBar { 
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
 	background-color: #fff; 
 	list-style-type: none; 
-	padding: 7px; 
+	padding: 5px; 
 	border: 2px solid #999;
-	/*border-radius: 7px; 
-	font-size: 1em;*/
-	z-index: 5;
+	font-size: 1em;
+	pointer-events: all;
 }
 
 .addressBar li { 
 	font-size: 0.8em; 
-	font-weight: bold; 
+	font-weight: normal; 
+	line-height: 24px;
 	display: inline-block; 
-	padding: 0.5em 1.5em; 
+	padding: 0.5em 0.7em; 
 	color: #444; 
-	left: 20%; 
+	/*left: 20%;*/ 
 }
 
 .addressBar li:first-child { 
-	font-size: 1.2em;
+	width: 20%;
+	font-weight: bold; 
+	font-size: 1.1em;
 	color: #7c606b;
 }
 
+.addressBar li h3 { 
+}
 
-/*.addressBar li:hover { background-color: #ddd; }    
-.addressBar li:first-child { border-left: none; border-radius: 7px 0 0 7px; }
-.addressBar li { font-size: 16px; font-weight: bold; display: inline-block; padding: 0.5em 1.5em; cursor: pointer; color: #444; text-shadow: #f7f7f7 0 1px 1px; border-left: 1px solid #ddd; border-right: 1px solid #888; left: 20%; }
-.addressBar li { *display: inline !important; } /* IE7 only */
-/*.addressBar .selected { background-color: #444 !important; color: white; text-shadow:none; border-right-color: #aaa; border-left: none; box-shadow:inset 1px 2px 6px #070707; }   */
+.addressBar li:nth-child(2) input { width: 15em; }*/
+.addressBar li:nth-child(3){ width: 2em; }
+.addressBar li:nth-child(4){ width: 10em; }
+
+.serviceBox { 
+	font-size: 0.8em; 
+	position: relative;
+	top: 20px;
+	left: 0;
+	width: 35%;
+	max-height: 350px;
+	overflow: scroll;
+	background-color: #fff; 
+	list-style-type: none; 
+	padding: 5px; 
+	border: 2px solid #999;
+	pointer-events: all;
+}
+
+.serviceBox th, .serviceBox tr{
+	border-bottom: 1px solid #999;
+}

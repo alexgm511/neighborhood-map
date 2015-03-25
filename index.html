@@ -10,15 +10,36 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<ul class="addressBar">
-		<li>Neighborhood Happenings</li>
-		<li>City and neighborhood: <input data-bind="value: neigborhood" /></li>
-		<li><button data-bind="click: loadMap">Go</button></li>
-	</ul>
 	<div id="map" data-bind="value: map">
 		<div id="map-canvas"></div>
 	</div>
+	<div class="overlayInfo">
+		<ul class="addressBar">
+			<li>Neighborhood<br />Happenings</li>
+			<li>City and neighborhood:<br /><input data-bind="value: neigborhood" /></li>
+			<li><button data-bind="click: loadMap">Go</button></li>
+			<li>Businesses: <input type="checkbox" data-bind="checked: showServices" /><br /><button data-bind="click: hideMarkers">Hide Markers</button><br /><button data-bind="click: showMarkers">Show Markers</button></li>
+			<!--li><button data-bind="click: hideMarkers">Clear Markers</button></li>
+			<li><button data-bind="click: showMarkers">Show Markers</button></li-->
+		</ul>
+		<!-- ko if: showServices -->
+		<div class="serviceBox">
+			<table>
+				<thead>
+					<tr><th>Place</th><th>Address</th></tr>
+				</thead>
+				<tbody data-bind="foreach: services">
+					<tr>
+						<td><a href="#" data-bind="text: name, click: $root.showPlace"></a></td>
+						<!--td data-bind="text: name"></td-->
+						<td data-bind="text: vicinity"></td>
+					</tr>
+				</tbody>
+			</table>
 
+		</div>
+		<!-- /ko -->
+	</div>
 	<script src="js/lib/knockout-3.3.0.js"></script>
 	<script src="js/app.js"></script>
 </body>
