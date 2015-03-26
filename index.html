@@ -18,12 +18,19 @@
 			<li>Neighborhood<br />Happenings</li>
 			<li>City and neighborhood:<br /><input data-bind="value: neigborhood" /></li>
 			<li><button data-bind="click: loadMap">Go</button></li>
-			<li>Businesses: <input type="checkbox" data-bind="checked: showServices" /><br /><button data-bind="click: hideMarkers">Hide Markers</button><br /><button data-bind="click: showMarkers">Show Markers</button></li>
-			<!--li><button data-bind="click: hideMarkers">Clear Markers</button></li>
-			<li><button data-bind="click: showMarkers">Show Markers</button></li-->
+			<li><input type="checkbox" data-bind="checked: showServices" />Show Services<br /><button data-bind="click: hideMarkers">Hide Markers</button><br /><button data-bind="click: showMarkers">Show Markers</button></li>
 		</ul>
 		<!-- ko if: showServices -->
 		<div class="serviceBox">
+			<div>
+				<label>Sort Places:</label>
+				<select data-bind="value: sortType, event:{ change: reSort }">
+					<option value="">Show All</option>
+					<!-- ko foreach: $root.placeTypes -->
+					<option value="" data-bind="text: $data, attr: { value: $data }"></option>
+					<!-- /ko -->
+				</select>			
+			</div>
 			<table>
 				<thead>
 					<tr><th>Place</th><th>Address</th></tr>
@@ -31,7 +38,6 @@
 				<tbody data-bind="foreach: services">
 					<tr>
 						<td><a href="#" data-bind="text: name, click: $root.showPlace"></a></td>
-						<!--td data-bind="text: name"></td-->
 						<td data-bind="text: vicinity"></td>
 					</tr>
 				</tbody>

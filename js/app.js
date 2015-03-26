@@ -7,7 +7,9 @@ function WebmailViewModel() {
 	self.location;
 	self.infowindow;
 	self.services = ko.observableArray([]);
+	self.allServices = ko.observableArray([]);
 	self.showServices = ko.observable(false);
+	self.placeTypes = ko.observableArray([]);
 	self.hideMarkers = function(){
 		self.clearMarkers();
 	};
@@ -15,6 +17,42 @@ function WebmailViewModel() {
 		self.setAllMap(self.map);
 	};
 	self.markers = [];
+	self.sortType = ko.observable("");
+	self.reSort = function() {
+		console.log(self.sortType());
+		self.services.removeAll() //= [];
+		for (i=0; i < self.allServices().length; i++) {
+			// Empty string on sort type - show all
+			if (self.sortType() === "") {
+				self.services.push(self.allServices()[i]);
+			} else { 	// go through the types of each place to sort.
+				for (j=0; j < self.allServices()[i].types.length; j++) {
+					if (self.allServices()[i].types[j] === self.sortType()) {
+						self.services.push(self.allServices()[i]);
+					}
+				}
+			}
+		}
+		console.log(self.services.length);
+		self.services.valueHasMutated;
+	};
+	
+	/*self.sortList = function(data) {
+		var test = false;
+		if (self.sortType() == "") {
+			test = true;
+		} else {
+			var types = data.types;
+			console.log(types);
+			console.log(self.sortType);
+			for (var i = 0; i < types.length; i++) {
+				if (types[i] == self.sortType()) {
+					test = true
+				} 
+			}
+		}
+		return test;
+	};*/
 
 	// Input field for neighborhood
     self.neigborhood = ko.observable();
@@ -76,10 +114,20 @@ function WebmailViewModel() {
 	self.svsCallback = function(results, status) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
-				console.log(results[i]);
-				self.services.push(results[i]);
 				var place = results[i];
+				console.log(place);
+				// add place to services array
+				self.services.push(place);
+				// allServices array will be the full list backup
+				self.allServices.push(place);
+				// create a marker for each place
 				self.createMarker(place);
+				// add each distinct type of place to types array
+				for (j=0; j < place.types.length; j++) {
+					if (self.placeTypes.indexOf(place.types[j]) === -1) {
+						self.placeTypes.push(place.types[j]);
+					} 
+				}
 			}
 		  }
 	}
@@ -89,13 +137,15 @@ function WebmailViewModel() {
 		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker({
 			map: null,  //self.map,
-			//position: place.geometry.location
 			position: placeLoc
 		});
+		// add marker to markers array
 		self.markers.push(marker);
+		// make a list of the place's types to add to place's infoWindow
 		var types = place.types;
 		var markerTxt = types.join('<br />');
-
+		console.log(types[0]+', '+types[1]+', '+types[2]);
+		// add a listener to each marker with the infoWindow content
 		google.maps.event.addListener(marker, 'click', function() {
 			self.infowindow.setContent('<strong>'+place.name+'</strong>'+'<br />'+markerTxt);
 			self.infowindow.open(self.map, this);
@@ -109,21 +159,22 @@ function WebmailViewModel() {
 	  }
 	};
 
-		// Sets the map on all markers in the array.
+	// Displays the specific marker when a place from the list is clicked.
 	self.showPlace = function() {
+		// get location from clicked item
 		var location = this.geometry.location;
-	  for (var i = 0; i < self.markers.length; i++) {
-		  if (self.markers[i].position == location) {
+		for (var i = 0; i < self.markers.length; i++) {
+			// find the specific marker by its location
+			if (self.markers[i].position == location) {
+				// display it on the map
 				self.markers[i].setMap(self.map);
+				// to better see the place, make this marker the center of the map
+				// panTo does it slower to avoid a jerky motion.
 				self.map.panTo(location);
+				// trigger the click event to show the infoWindow
 				google.maps.event.trigger(self.markers[i], 'click');
-				//self.markers[i].click();
 			}	
-	  }
-		window.setTimeout(function() {
-			self.map.setCenter(location);
-		}, 3000);
-		//trigger(instance:Object, eventName:string, var_args:*)
+		}
 	};
 
 	// Removes the markers from the map, but keeps them in the array.
