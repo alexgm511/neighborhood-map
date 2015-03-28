@@ -15,15 +15,17 @@
 	</div>
 	<div class="overlayInfo">
 		<ul class="addressBar">
-			<li>Neighborhood<br />Happenings</li>
+			<li>Zone Explorer</li>
 			<li>City and neighborhood:<br /><input data-bind="value: neigborhood" /></li>
 			<li><button data-bind="click: loadMap">Go</button></li>
-			<li><input type="checkbox" data-bind="checked: showServices" />Show Services<br /><button data-bind="click: hideMarkers">Hide Markers</button><br /><button data-bind="click: showMarkers">Show Markers</button></li>
+			<li><input type="checkbox" data-bind="checked: showServices" />Show Services<br /><input type="checkbox" data-bind="checked: markersHide, click: hideMarkers" />Hide Markers</li>
 		</ul>
 		<!-- ko if: showServices -->
 		<div class="serviceBox">
-			<div>
-				<label>Sort Places:</label>
+			<h3>Area Services</h3>
+			<img src="images/poweredby-foursquare.png" />
+			<div class="sortRow">
+				<label>Search by Type:</label>
 				<select data-bind="value: sortType, event:{ change: reSort }">
 					<option value="">Show All</option>
 					<!-- ko foreach: $root.placeTypes -->
@@ -38,15 +40,15 @@
 				<tbody data-bind="foreach: services">
 					<tr>
 						<td><a href="#" data-bind="text: name, click: $root.showPlace"></a></td>
-						<td data-bind="text: vicinity"></td>
+						<td data-bind="text: location.address"></td>
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
 		<!-- /ko -->
 	</div>
 	<script src="js/lib/knockout-3.3.0.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/app.js"></script>
 </body>
 </html>

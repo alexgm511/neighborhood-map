@@ -38,13 +38,13 @@ html, body, #map, #map-canvas {
 	display: inline-block; 
 	padding: 0.5em 0.7em; 
 	color: #444; 
-	/*left: 20%;*/ 
 }
 
 .addressBar li:first-child { 
 	width: 20%;
 	font-weight: bold; 
 	font-size: 1.1em;
+	vertical-align: top; 
 	color: #7c606b;
 }
 
@@ -70,6 +70,35 @@ html, body, #map, #map-canvas {
 	pointer-events: all;
 }
 
-.serviceBox th, .serviceBox tr{
+.serviceBox h3 {
+	font-weight: bold; 
+	color: #7c606b;
+	margin-top: 0.5em;
+	margin-bottom: 0;
 	border-bottom: 1px solid #999;
 }
+
+.serviceBox .sortRow {
+	line-height: 24px;
+	margin-bottom: 0.8em;
+}
+
+.serviceBox th {
+	border-bottom: 1px solid #999;
+}
+
+.serviceBox img {
+	max-width: 200px;
+}
+
+.imageBox { 
+	font-size: 0.8em; 
+	position: relative;
+	top: 200px;
+	right: 0;
+	width: 35%;
+	max-height: 240px;
+	border: 2px solid #999;
+	pointer-events: all;
+}
+
