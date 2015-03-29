@@ -11,8 +11,8 @@ html, body, #map, #map-canvas {
 	position: absolute;
 	top: 20px;
 	left: 50%;
-	width: 70%;
-	margin-left: -35%;
+	width: 80%;
+	margin-left: -40%;
 	z-index: 5;
 	pointer-events: none;
 }
@@ -34,53 +34,95 @@ html, body, #map, #map-canvas {
 .addressBar li { 
 	font-size: 0.8em; 
 	font-weight: normal; 
-	line-height: 24px;
+	line-height: 16px;
 	display: inline-block; 
 	padding: 0.5em 0.7em; 
 	color: #444; 
 }
 
 .addressBar li:first-child { 
-	width: 20%;
+	width: 16%;
 	font-weight: bold; 
 	font-size: 1.1em;
-	vertical-align: top; 
+	vertical-align: center; 
 	color: #7c606b;
 }
 
-.addressBar li h3 { 
+.addressBar li:nth-child(2){ width: 20%; }
+.addressBar li:nth-child(3) input { 
+	padding: 5px 5px 5px 5px;
+	width: 100%; 
+	font-size: 1.5em;
+	border: 0;
+	background-color: #e5eefc;
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(140,136,140,1);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(140,136,140,1);
+	box-shadow: 4px 4px 5px 0px rgba(140,136,140,1);
 }
-
-.addressBar li:nth-child(2) input { width: 15em; }*/
-.addressBar li:nth-child(3){ width: 2em; }
-.addressBar li:nth-child(4){ width: 10em; }
+.addressBar li:nth-child(3){ width: 45%; }
+.addressBar li:nth-child(4){ width: 1em; }
 
 .serviceBox { 
 	font-size: 0.8em; 
 	position: relative;
 	top: 20px;
 	left: 0;
-	width: 35%;
-	max-height: 350px;
-	overflow: scroll;
+	max-width: 220px;
+	max-height: 30px;
+	overflow: hidden;
 	background-color: #fff; 
-	list-style-type: none; 
 	padding: 5px; 
-	border: 2px solid #999;
+	border: 2px solid #f74978;
 	pointer-events: all;
 }
 
 .serviceBox h3 {
 	font-weight: bold; 
 	color: #7c606b;
-	margin-top: 0.5em;
-	margin-bottom: 0;
+	margin: 0.5em 0 0.1em;
+	padding-bottom: 0.8em;
 	border-bottom: 1px solid #999;
+}
+
+.serviceBox  .arrows {
+	display: inline-block;
+	width: 20px;
+	height: 13px;
+	margin: 0 0 0 15px;
+	background: url(../images/arrow.png) no-repeat 0 0;
+	background-size: 20px auto;
+}
+
+.hideMarkers {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #bfbfbf;
 }
 
 .serviceBox .sortRow {
 	line-height: 24px;
 	margin-bottom: 0.8em;
+}
+
+.serviceBox .sortRow select {
+	max-width: 200px;
+}
+
+.serviceBox ul {
+	list-style-type: none; 
+	padding-left: 0;
+}
+
+.serviceBox li {
+	padding: 5px 0 5px;
+	border-bottom: 1px solid #bfbfbf;
+}
+
+.serviceBox li:hover {
+	background-color: #ddd;
+}
+
+.serviceBox a {
+	text-decoration: none;
 }
 
 .serviceBox th {

@@ -16,14 +16,16 @@
 	<div class="overlayInfo">
 		<ul class="addressBar">
 			<li>Zone Explorer</li>
-			<li>City and neighborhood:<br /><input data-bind="value: neigborhood" /></li>
+			<li>Enter a neighborhood or<br ?>move in the map and Go.</li>
+			<li><input data-bind="value: neigborhood" /></li>
 			<li><button data-bind="click: loadMap">Go</button></li>
-			<li><input type="checkbox" data-bind="checked: showServices" />Show Services<br /><input type="checkbox" data-bind="checked: markersHide, click: hideMarkers" />Hide Markers</li>
 		</ul>
-		<!-- ko if: showServices -->
 		<div class="serviceBox">
-			<h3>Area Services</h3>
+			<h3 data-bind="click: arrows">Area Venues <span class="arrows"></span></h3>
 			<img src="images/poweredby-foursquare.png" />
+			<div class="hideMarkers">
+				<input type="checkbox" data-bind="checked: markersHide, click: hideMarkers" /><label>Hide Markers:</label>
+			</div>
 			<div class="sortRow">
 				<label>Search by Type:</label>
 				<select data-bind="value: sortType, event:{ change: reSort }">
@@ -33,19 +35,12 @@
 					<!-- /ko -->
 				</select>			
 			</div>
-			<table>
-				<thead>
-					<tr><th>Place</th><th>Address</th></tr>
-				</thead>
-				<tbody data-bind="foreach: services">
-					<tr>
-						<td><a href="#" data-bind="text: name, click: $root.showPlace"></a></td>
-						<td data-bind="text: location.address"></td>
-					</tr>
-				</tbody>
-			</table>
+			<div>
+				<ul data-bind="foreach: services">
+					<li><a href="#" data-bind="text: name, click: $root.showPlace"></a></li>
+				</ul>
+			</div>
 		</div>
-		<!-- /ko -->
 	</div>
 	<script src="js/lib/knockout-3.3.0.js"></script>
 	<script src="js/jquery.min.js"></script>

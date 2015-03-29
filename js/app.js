@@ -123,6 +123,22 @@ function mapViewModel() {
 	self.showServices = ko.observable(false);
 	self.markersHide = ko.observable(true);
 	self.placeTypes = ko.observableArray([]);
+	self.markers = [];
+	self.sortType = ko.observable("");
+	
+	self.arrows = function(blnClose) {
+		/*var forceClose = false;
+		if (!blnClose) {
+			forceClose = true;
+		}*/
+		if (($('.serviceBox').css('max-height') === '350px') || blnClose === true) {
+			$('.serviceBox').css('max-height', '30px').css('overflow', 'hidden').css('border', '2px solid #f74978');
+			$('.serviceBox .arrows').css('background-position', '0 0px');
+		} else {
+			$('.serviceBox').css('max-height', '350px').css('overflow', 'scroll').css('border', '2px solid #999');	
+			$('.serviceBox .arrows').css('background-position', '0 -13px');
+		}
+	};
 
 	// Show or hide the map markers. 
 	// On hiding the markers, they are removed from the map, 
@@ -135,9 +151,6 @@ function mapViewModel() {
 		}
 		return true;
 	};
-	
-	self.markers = [];
-	self.sortType = ko.observable("");
 	
 	self.reSort = function() {
 		console.log(self.sortType());
@@ -179,13 +192,14 @@ function mapViewModel() {
 	
 	// Google Map function that does the address to latitude/longitude lookup.
 	self.codeAddress = function() {
-		if (self.neigborhood.length == 0) {
+		console.log('Im in codeAddress :'+self.neigborhood().length);
+		if (self.neigborhood().length == 0) {
 			self.location = self.map.getCenter();
 			self.markersHide(true);
 			self.fsqData.fsqCallback(self.location.k, self.location.D);
 		} else {
 			var address = self.neigborhood();
-		
+			self.neigborhood("");
 			self.geocoder.geocode( { 'address': address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					self.location = results[0].geometry.location;
@@ -207,6 +221,7 @@ function mapViewModel() {
 		self.allServices.removeAll();
 		self.placeTypes.removeAll();
 		self.markers = [];
+		self.arrows(true);
 		self.codeAddress();
 	};
 	
