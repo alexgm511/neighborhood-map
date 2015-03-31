@@ -1,49 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UFT-8">
-	<title>Neighborhood Map</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKffQ59SdaJYYrDkdp995ubP6S8HbXy2o&libraries=places">
+    <meta charset="utf-8">
+    <title>Neighborhood Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKffQ59SdaJYYrDkdp995ubP6S8HbXy2o&libraries=places">
     </script>
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-	<div id="map" data-bind="value: map">
-		<div id="map-canvas"></div>
-	</div>
-	<div class="overlayInfo">
-		<ul class="addressBar">
-			<li>Zone Explorer</li>
-			<li>Enter a neighborhood or<br ?>move in the map and Go.</li>
-			<li><input data-bind="value: neigborhood" /></li>
-			<li><button data-bind="click: loadMap">Go</button></li>
-		</ul>
-		<div class="serviceBox">
-			<h3 data-bind="click: arrows">Area Venues <span class="arrows"></span></h3>
-			<img src="images/poweredby-foursquare.png" />
-			<div class="hideMarkers">
-				<input type="checkbox" data-bind="checked: markersHide, click: hideMarkers" /><label>Hide Markers:</label>
-			</div>
-			<div class="sortRow">
-				<label>Search by Type:</label>
-				<select data-bind="value: sortType, event:{ change: reSort }">
-					<option value="">Show All</option>
-					<!-- ko foreach: $root.placeTypes -->
-					<option value="" data-bind="text: $data, attr: { value: $data }"></option>
-					<!-- /ko -->
-				</select>			
-			</div>
-			<div>
-				<ul data-bind="foreach: services">
-					<li><a href="#" data-bind="text: name, click: $root.showPlace"></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<script src="js/lib/knockout-3.3.0.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/app.js"></script>
+    <div id="map" data-bind="value: map">
+        <div id="map-canvas"></div>
+    </div>
+    <div class="overlayInfo">
+        <ul class="addressBar">
+            <li>Zone Explorer</li>
+            <li>Enter a neighborhood or move in the map and click Go.
+                <br>
+                <input data-bind="value: neighborhood, valueUpdate: 'afterkeydown', enterkey: GMap.loadMap">
+            </li>
+            <li>
+                <button data-bind="click: GMap.loadMap">Go</button>
+            </li>
+        </ul>
+        <div class="serviceBox">
+            <h3 data-bind="click: $root.GMap.venuesToggle">Area Venues <span class="arrows"></span></h3>
+            <div id="msgElem"></div>
+            <div class="svsContent">
+                <img src="images/poweredby-foursquare.png" alt="Powered by Foursquare">
+                <div class="hideMarkers">
+                    <input type="checkbox" data-bind="checked: markersHide, click: GMap.hideMarkers">
+                    <label>Hide Markers:</label>
+                </div>
+                <div class="sortRow">
+                    <label>Search by Type:</label>
+                    <select data-bind="value: sortType, event:{ change: GMap.reSort }">
+                        <option value="">Show All</option>
+                        <!-- ko foreach: $root.placeTypes -->
+                        <option value="" data-bind="text: $data, attr: { value: $data }"></option>
+                        <!-- /ko -->
+                    </select>
+                </div>
+                <div>
+                    <ul data-bind="foreach: services">
+                        <li data-bind="text: name, click: $root.GMap.showPlace"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/lib/knockout-3.3.0.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>
