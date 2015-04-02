@@ -225,7 +225,9 @@ function mapViewModel() {
             self.markersHide(true);
             self.GMap.hideMarkers();
             self.markers = [];
-            self.GMap.venuesToggle(true);
+            if ($('.serviceBox').hasClass('box-expand')) {
+            	self.GMap.venuesToggle();
+            }
             self.fsqData.toggleVenuesAll(true);
             self.fsqData.toggleError(false);
             self.GMap.codeAddress();
@@ -233,16 +235,11 @@ function mapViewModel() {
 
 
         // Venues box starts out closed with a down arrow to open it.
-		// This function toggles it open and close and shows the down and up arrow accordingly
-        // If the blnClose parameter is passed true the box is forced close.
+	// This function toggles it open and close and shows the down and up arrow accordingly
         venuesToggle: function(blnClose) {
-            if (($('.serviceBox').css('max-height') === '350px') || blnClose === true) {
-                $('.serviceBox').css('max-height', '30px').css('overflow', 'hidden').css('border', '2px solid #f74978');
-                $('.serviceBox .arrows').css('background-position', '0 0px');
-            } else {
-                $('.serviceBox').css('max-height', '350px').css('overflow', 'scroll').css('border', '2px solid #999');
-                $('.serviceBox .arrows').css('background-position', '0 -13px');
-            }
+		$('.serviceBox').scrollTop(0);	
+		$('.serviceBox').toggleClass('box-expand');
+		$('.serviceBox .arrows').toggleClass('arrow-up');
         },
 
         // Show or hide the map markers. 
@@ -271,7 +268,9 @@ function mapViewModel() {
                 'lat': this.location.lat,
                 'lng': this.location.lng
             };
-            //var location = this.geometry.location;
+            console.log(location);
+            self.GMap.venuesToggle();
+
             for (var i = 0; i < self.markers.length; i++) {
                 // find the specific marker by its id
                 if (self.markers[i].id === this.id) {
@@ -280,9 +279,25 @@ function mapViewModel() {
                     // to better see the place, make this marker the center of the map
                     // panTo does it slower to avoid a jerky motion.
                     self.map.panTo(location);
+                    
+                    // get the coordinates of the map boundaries which depends on the screen size.
+                    // this will allow for better marker positioning.
+                    var bounds = self.map.getBounds();
+                    console.log(bounds);
+                    // calculate the distance from the center to the edge to move the marker down on smaller screens.
+                    var newCenter = parseFloat(this.location.lat) + ((parseFloat(bounds.Da.j) - parseFloat(this.location.lat))*parseFloat(0.6));
+                    // 'this' gives us the location of the clicked item
+                    var newLocation = {
+			'lat': newCenter,
+			'lng': location.lng
+                    };
+                    
                     // trigger the marker's click event to show the infoWindow
                     google.maps.event.trigger(self.markers[i], 'click');
-					// Once there is a marker on the map, enable the Hide marker option.
+                    // adjust to new location
+                    self.map.panTo(newLocation);
+
+                    // Once there is a marker on the map, enable the Hide marker option.
                     self.markersHide(false);
                 }
             }
