@@ -75,6 +75,13 @@ html, body, #map, #map-canvas {
 	pointer-events: all;
 }
 
+.box-expand {
+	max-height: 350px !important;
+	max-width: 220px;
+	overflow: scroll;
+	border-color: #999;
+}
+
 .serviceBox h3 {
 	font-weight: bold; 
 	color: #7c606b;
@@ -90,6 +97,10 @@ html, body, #map, #map-canvas {
 	margin: 0 0 0 15px;
 	background: url(../images/arrow.png) no-repeat 0 0;
 	background-size: 20px auto;
+}
+
+.arrow-up {
+	background-position: 0 -13px;
 }
 
 .hideMarkers {
@@ -131,4 +142,50 @@ html, body, #map, #map-canvas {
 
 .markerMsg {
 	max-width: 220px;
+}
+
+@media only screen and (max-width: 480px) {
+	.addressBar { 
+		padding: 0; 
+		border: 2px solid #999;
+	}
+	
+	.addressBar li { 
+		padding: 2px 0 2px 2px;
+	}
+
+	.addressBar li:first-child { 
+		width: 23%;
+		font-size: 0.8em;
+		vertical-align: top; 
+
+	}
+
+	.addressBar li:nth-child(2){ width: 55%; }
+	.addressBar li:nth-child(2) span { 
+		display: none; 
+	}
+	.addressBar li:nth-child(2) input { 
+		font-size: 1.2em;
+		padding: 2px 2px 2px 2px;
+	}
+
+	.serviceBox { 
+		font-size: 0.8em; 
+		max-width: 200px;
+		max-height: 18px;
+		padding: 2px; 
+	}
+
+	.serviceBox h3 {
+		font-weight: bold; 
+		font-size: 1em; 
+		margin: 0;
+	}
+	
+	.box-expand {
+		max-height: 200px !important;
+		max-width: 220px;
+	}
+	
 }
