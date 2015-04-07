@@ -1,6 +1,7 @@
 body {
- font-family: Verdana, Arial, Helvetica, sans-serif;
- }
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
 html, body, #map, #map-canvas { 
 	height: 100%; 
 	margin: 0; 
@@ -48,7 +49,10 @@ html, body, #map, #map-canvas {
 	color: #7c606b;
 }
 
-.addressBar li:nth-child(2){ width: 65%; }
+.addressBar li:nth-child(2){
+	width: 65%; 
+}
+
 .addressBar li:nth-child(2) input { 
 	padding: 5px 5px 5px 5px;
 	width: 100%; 
@@ -59,6 +63,7 @@ html, body, #map, #map-canvas {
 	-moz-box-shadow: 4px 4px 5px 0px rgba(140,136,140,1);
 	box-shadow: 4px 4px 5px 0px rgba(140,136,140,1);
 }
+
 .addressBar li:nth-child(3){ width: 1em; }
 
 .serviceBox { 
@@ -158,13 +163,16 @@ html, body, #map, #map-canvas {
 		width: 23%;
 		font-size: 0.8em;
 		vertical-align: top; 
-
 	}
 
-	.addressBar li:nth-child(2){ width: 55%; }
+	.addressBar li:nth-child(2){
+		width: 55%; 
+	}
+
 	.addressBar li:nth-child(2) span { 
 		display: none; 
 	}
+
 	.addressBar li:nth-child(2) input { 
 		font-size: 1.2em;
 		padding: 2px 2px 2px 2px;
@@ -187,5 +195,4 @@ html, body, #map, #map-canvas {
 		max-height: 200px !important;
 		max-width: 220px;
 	}
-	
 }
