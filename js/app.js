@@ -192,7 +192,7 @@ function mapViewModel() {
         // Google Map lookup function returns latitude/longitude from address.
 		// If no address is given, map center is used to find surrounding venues.
         codeAddress: function() {
-            if (self.neighborhood().length == 0) {
+            if (self.neighborhood.length == 0) {
                 self.location = self.map.getCenter();
                 self.markersHide(true);
                 self.fsqData.fsqCallback(self.location.k, self.location.D);
