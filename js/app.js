@@ -13,6 +13,7 @@ function mapViewModel() {
     self.geocoder;
     self.service;
     self.location;
+	self.location2;
     self.infowindow;
     self.services = ko.observableArray([]);
     self.allServices = ko.observableArray([]);
@@ -186,27 +187,28 @@ function mapViewModel() {
             // Get the location object from the current map
             var myLocation = self.map.getCenter();
             // call to Foursquare for venues in the area
-            self.fsqData.fsqCallback(myLocation.k, myLocation.D);
+            self.fsqData.fsqCallback(myLocation.A, myLocation.F);
         },
 
         // Google Map lookup function returns latitude/longitude from address.
 		// If no address is given, map center is used to find surrounding venues.
         codeAddress: function() {
-            if (self.neighborhood.length == 0) {
+            if (self.neighborhood().length == 0) {
                 self.location = self.map.getCenter();
                 self.markersHide(true);
-                self.fsqData.fsqCallback(self.location.k, self.location.D);
+                self.fsqData.fsqCallback(self.location.A, self.location.F);
             } else {
                 var address = self.neighborhood();
                 self.neighborhood("");
                 self.geocoder.geocode({
                     'address': address
                 }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
+                    if (status == google.maps.GeocoderStatus.OK) {						
                         self.location = results[0].geometry.location;
                         self.map.setCenter(self.location);
                         self.markersHide(true);
-                        self.fsqData.fsqCallback(self.location.k, self.location.D);
+						self.location2 = self.map.getCenter();
+                        self.fsqData.fsqCallback(self.location2.A, self.location2.F);
                     } else {
                         alert('Sorry, could not find your neighborhood for the following reason: ' + status);
                     }
