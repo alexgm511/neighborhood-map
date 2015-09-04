@@ -205,11 +205,14 @@ function mapViewModel() {
                 }, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {						
                         self.location = results[0].geometry.location;
+						console.log(self.location);
                         self.map.setCenter(self.location);
                         self.markersHide(true);
 						self.location2 = self.map.getCenter();
-                        self.fsqData.fsqCallback(self.location2.A, self.location2.F);
-                    } else {
+                        //self.fsqData.fsqCallback(self.location2.A, self.location2.F);
+                        self.fsqData.fsqCallback(self.location.G, self.location.K);
+                        console.log(self.location.G+ ", "+ self.location.K);
+                   } else {
                         alert('Sorry, could not find your neighborhood for the following reason: ' + status);
                     }
                 });
@@ -287,7 +290,7 @@ function mapViewModel() {
                     var bounds = self.map.getBounds();
                     console.log(bounds);
                     // calculate the distance from the center to the edge to move the marker down on smaller screens.
-                    var newCenter = parseFloat(this.location.lat) + ((parseFloat(bounds.Da.j) - parseFloat(this.location.lat))*parseFloat(0.6));
+                    var newCenter = parseFloat(this.location.lat) + ((parseFloat(bounds.Ja.j) - parseFloat(this.location.lat))*parseFloat(0.6));
                     // 'this' gives us the location of the clicked item
                     var newLocation = {
 			'lat': newCenter,
